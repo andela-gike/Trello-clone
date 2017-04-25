@@ -7,6 +7,11 @@ node_js: "6"
 services:
   - mongodb
 
-script:
-  - npm test
+# script:
+#   - npm test
 
+# after_script:
+#   - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls.js
+
+# after_success:
+# - npm run coveralls
