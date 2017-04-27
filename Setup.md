@@ -1,4 +1,4 @@
-Setup mongodb: 
+Setup mongodb:
 - Install mongodb with Homebrew
 - Start services with "brew services start momngodb"
 - Create a server.js file that includes the port of the connection mongodb
@@ -10,3 +10,7 @@ Setup mongodb:
 5. To find a data run this command db.database_name.find({first: 'james', last: 'caan'})
 6. To delete a data run this command db.database_name.remove({first: 'james', last: 'caan'});
 7. To create a collection run this command db.createCollection(name, options)
+
+React:
+
+- Redux is what gives the action such anytime anything happens action is dispatched by redux.

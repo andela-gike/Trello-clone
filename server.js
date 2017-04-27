@@ -11,6 +11,9 @@ const app = express();
 
 const compiler = webpack(webpackConfig);
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.use(webpackMiddleware(compiler, {
   hot: true,
   pubilcPath: webpackConfig.output.publicPath,
@@ -32,5 +35,5 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './client/index.html'));
 });
 
-app.listen(5050, () => console.log('Running on port 5000....'));
+app.listen(5001, () => console.log('Running on port 5000....'));
 

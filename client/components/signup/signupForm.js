@@ -9,15 +9,10 @@ class SignupForm extends React.Component {
       FullName: '',
       email: '',
       password: '',
-      errors: {},
-      isLoading: false,
-      invalid: false
     };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-
-
   }
 
   onChange(e) {
@@ -26,7 +21,9 @@ class SignupForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
+    console.log(this.props);
+    this.props.SignupformRequest(this.state);
+    // console.log(this.state);
   }
 
   render() {
@@ -45,7 +42,6 @@ class SignupForm extends React.Component {
               name="Name"
               value={this.state.Name}
               onChange={this.onChange}
-
             />
 
           </div>
@@ -58,7 +54,6 @@ class SignupForm extends React.Component {
               name="FullName"
               value={this.state.FullName}
               onChange={this.onChange}
-
             />
 
           </div>
@@ -67,11 +62,10 @@ class SignupForm extends React.Component {
             <input
               placeholder="e.g., grace.ike@gmail.com"
               className="form-control"
-              type="text"
+              type="email"
               name="email"
               value={this.state.email}
               onChange={this.onChange}
-
             />
 
           </div>
@@ -80,19 +74,22 @@ class SignupForm extends React.Component {
             <input
               placeholder="e.g., ............."
               className="form-control"
-              type="text"
+              type="password"
               name="password"
               value={this.state.password}
               onChange={this.onChange}
-
             />
 
           </div>
-          <button type="submit" className="SignUp-Form-SubmitButton">Create a New Account</button>
+          <button type="submit" className="SignUp-Form-SubmitButton form-group">Create a New Account</button>
         </form>
       </div>
     );
   }
 }
+
+SignupForm.proptypes = {
+  SignupformRequest: React.PropTypes.func.isRequired
+};
 
 export default SignupForm;
