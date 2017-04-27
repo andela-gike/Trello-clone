@@ -1,17 +1,17 @@
 import React from 'react';
-import SignupForm from './signupForm';
+import LoginForm from './loginForm';
 
 
-class SignupPage extends React.Component {
+class LoginPage extends React.Component {
   render() {
     return (
       <div className="row">
         <div className="col-md-6">
-          <SignupForm />
+          <LoginForm />
         </div>
       </div>
     );
   }
 }
 
-export default SignupPage;
+export default LoginPage;
