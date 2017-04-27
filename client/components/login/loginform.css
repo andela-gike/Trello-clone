@@ -1,7 +1,7 @@
 .Login-Form {
 	font-family: "jaf-facitweb","Helvetica Neue",Arial,sans-serif;
 	color: #4d4d4d;
-	font-weight: 300;
+	font-weight: 350;
 	line-height: 1.44em;
 
 	display: block;
@@ -11,12 +11,27 @@
 }
 
 .Login-Form-Header {
-	font-size: 1.777em;
+	font-size: 2em;
 	line-height: 1.2em;
 	margin: .67em 0;
 	margin-top: 1.6em;
 }
+.row {
+  margin-top: 50px;
+}
 
+textarea, input {
+    display: block;
+    margin: 0 0 1.2em;
+}
+
+.quiet{
+  color: #999;
+}
+
+.form-control{
+  width: 500px;
+}
 
 .Login-Form-Error {
   text-align: left;

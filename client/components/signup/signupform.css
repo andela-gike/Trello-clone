@@ -27,6 +27,11 @@
   width: 500px;
 }
 
+textarea, input {
+    display: block;
+    margin: 0 0 1.2em;
+}
+
 .SignUp-Form-Fiels {
 	display: flex;
 	flex-direction: column

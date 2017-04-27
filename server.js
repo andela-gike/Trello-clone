@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import express from 'express';
-import bodyParser from 'body-parser';
 import path from 'path';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
@@ -10,9 +9,6 @@ import webpackConfig from './webpack.config.dev';
 const app = express();
 
 const compiler = webpack(webpackConfig);
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 app.use(webpackMiddleware(compiler, {
   hot: true,
@@ -37,3 +33,4 @@ app.get('/', (req, res) => {
 
 app.listen(5001, () => console.log('Running on port 5000....'));
 
+export default app;
