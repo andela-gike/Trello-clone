@@ -30,18 +30,6 @@ const UserSchema = new Schema({
  * Methods
  */
 UserSchema.methods = {
-  /**
-   * Authenticate - check if the passwords are the same
-   * @param {String} plainText
-   * @return {Boolean}
-   * @api public
-   */
-  authenticate: (plainText) => {
-    if (!plainText || !this.hashedPassword) {
-      return false;
-    }
-    return bcrypt.compareSync(plainText, this.hashedPassword);
-  },
 
   /**
    * Encrypt password
@@ -53,8 +41,22 @@ UserSchema.methods = {
     if (!password) {
       return '';
     }
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+  },
+
+  /**
+   * Authenticate - check if the passwords are the same
+   * @param {String} plainText
+   * @return {Boolean}
+   * @api public
+   */
+  authenticate: (plainText) => {
+    if (!plainText || !this.hashedPassword) {
+      return false;
+    }
+    return bcrypt.compareSync(plainText, this.hashedPassword);
   }
+
 };
 
 const User = mongoose.model('User', UserSchema);
