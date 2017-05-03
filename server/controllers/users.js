@@ -54,6 +54,48 @@ const UserController = {
       }
     });
   },
+
+  displayAllUsers(request, response) {
+    User.find({}, (err, user) => {
+      if (err) {
+        response.status(500).json({
+          message: 'There was a problem listing all users'
+        });
+      }
+      response.status(200).send(user);
+    });
+  },
+
+  displayUserById(request, response) {
+    User.findById(request.params.id, (err, user) => {
+      if (err) {
+        response.status(500).send('There was a problem finding the user.');
+      }
+      if (!user) { return response.status(404).send('No user found.'); }
+      response.status(200).send(user);
+    });
+  },
+
+  updateUserById(request, response) {
+    User.findByIdAndUpdate(request.params.id, request.body, { new: true }, (err, user) => {
+      if (err) {
+        response.status(500).send({
+          message: 'There was a problem updating the user.'
+        });
+      }
+      response.status(200).send(user);
+    });
+  },
+
+  deleteUserById(request, response) {
+    User.findByIdAndRemove(request.params.id, (err) => {
+      if (err) {
+        response.status(500).send('There was a problem deleting the user.');
+      }
+      response.status(200).send({ message: 'User was deleted successfully.' });
+    });
+  },
+
   logoutUser(request, response) {
     response.status(200).send({
       message: 'You were logged out successfully'
