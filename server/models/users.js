@@ -34,31 +34,24 @@ UserSchema.methods = {
   /**
    * Encrypt password
    * @param {String} password
-   * @return {String}
+   * @return {String} hashedpassword
    * @api public
    */
   encryptPassword: (password) => {
-    if (!password) {
-      return '';
-    }
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
   },
 
   /**
    * Authenticate - check if the passwords are the same
-   * @param {String} plainText
-   * @return {Boolean}
+   * @param {String} user
+   * @param {String} password
+   * @return {String} a validated password
    * @api public
    */
-  authenticate: (plainText) => {
-    if (!plainText || !this.hashedPassword) {
-      return false;
-    }
-    return bcrypt.compareSync(plainText, this.hashedPassword);
+  authenticate: (user, password) => {
+    return bcrypt.compareSync(password, user.password);
   }
-
 };
 
-const User = mongoose.model('User', UserSchema);
+export default mongoose.model('User', UserSchema);
 
-export default User;

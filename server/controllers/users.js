@@ -27,7 +27,7 @@ const UserController = {
         user.fullname = fullname;
         user.email = email;
         user.username = username;
-        user.password = password;
+        user.password = user.encryptPassword(password);
         user.save(() => {
           response.status(201).json({
             message: 'Thanks! Your request to create a new user was successfuly!',
@@ -43,14 +43,17 @@ const UserController = {
     User.findOne({ email: request.body.email }, (err, user) => {
       if (err) {
         return next(err);
-      } else if (!user) {
+      }
+      if (!user) {
         response.status(400).json({
           message: 'User was not found'
         });
-      } else {
+      } else if (user.authenticate(user, request.body.password)) {
         response.status(200).json({
           message: 'You are sucessfully signed in', user
         });
+      } else {
+        response.status(400).send({ message: 'Password is invalid' });
       }
     });
   },
