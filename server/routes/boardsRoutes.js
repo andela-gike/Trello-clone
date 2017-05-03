@@ -1,11 +1,11 @@
 import express from 'express';
-// import boards from '../controllers/users';
+import boards from '../controllers/boards';
 
 
 const boardsRouter = express.Router();
 
-boardsRouter.route('/');
-  // .post(boards.createNewBoard);
+boardsRouter.route('/')
+  .post(boards.createNewBoard);
 
 
 boardsRouter.route('/:id');

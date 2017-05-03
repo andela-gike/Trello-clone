@@ -1,11 +1,13 @@
 import express from 'express';
 // import cards from '../controllers/users';
+import cards from '../controllers/cards';
+
 
 
 const cardsRouter = express.Router();
 
-cardsRouter.route('/');
-  // .post(cards.createNewCard);
+cardsRouter.route('/')
+  .post(cards.createNewCard);
 
 
 cardsRouter.route('/:id');
