@@ -7,10 +7,22 @@ const Schema = mongoose.Schema;
  * User Schema
  */
 const UserSchema = new Schema({
-  name: String,
-  email: String,
-  username: String,
-  hashedPassword: String,
+  fullname: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  username: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
   created: { type: Date, default: Date.now },
 });
 
