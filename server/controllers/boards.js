@@ -5,15 +5,15 @@ mongoose.model('Board');
 
 const boardsController = {
   createNewBoard(request, response) {
-    const title = request.body.title;
+    const name = request.body.name;
 
-    if (!title) {
+    if (!name) {
       return response.status(400).send({
-        message: 'Your board does not have a title ',
+        message: 'Your board does not have a name, please enter a board name ',
       });
     }
     const board = new Boards();
-    board.title = title;
+    board.name = name;
     board.save(() => {
       response.status(201).json({
         message: 'The request to create a new board was successfully', board
