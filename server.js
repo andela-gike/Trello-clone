@@ -1,12 +1,10 @@
-import mongoose from 'mongoose';
-import express from 'express';
 import path from 'path';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from './webpack.config.dev';
+import app from './server/routes/index';
 
-const app = express();
 
 const compiler = webpack(webpackConfig);
 
@@ -17,20 +15,8 @@ app.use(webpackMiddleware(compiler, {
 }));
 app.use(webpackHotMiddleware(compiler));
 
-//Set up default mongoose connection
-const mongoDB = 'mongodb://localhost/Trello-clone';
-mongoose.connect(mongoDB);
-
-//Get the default connection
-const db = mongoose.connection;
-
-//Bind connection to error event (to get notification of connection errors)
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './client/index.html'));
 });
 
-app.listen(5001, () => console.log('Running on port 5000....'));
-
-export default app;
+app.listen(5000, () => console.log('Running on port 5000....'));

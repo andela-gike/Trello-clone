@@ -7,10 +7,22 @@ const Schema = mongoose.Schema;
  * User Schema
  */
 const UserSchema = new Schema({
-  name: String,
-  email: String,
-  username: String,
-  hashedPassword: String,
+  fullname: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  username: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
   created: { type: Date, default: Date.now },
 });
 
@@ -18,34 +30,27 @@ const UserSchema = new Schema({
  * Methods
  */
 UserSchema.methods = {
-  /**
-   * Authenticate - check if the passwords are the same
-   * @param {String} plainText
-   * @return {Boolean}
-   * @api public
-   */
-  authenticate: (plainText) => {
-    if (!plainText || !this.hashedPassword) {
-      return false;
-    }
-    return bcrypt.compareSync(plainText, this.hashedPassword);
-  },
 
   /**
    * Encrypt password
    * @param {String} password
-   * @return {String}
+   * @return {String} hashedpassword
    * @api public
    */
   encryptPassword: (password) => {
-    if (!password) {
-      return '';
-    }
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+  },
+
+  /**
+   * Authenticate - check if the passwords are the same
+   * @param {String} user
+   * @param {String} password
+   * @return {String} a validated password
+   * @api public
+   */
+  authenticate: (user, password) => {
+    return bcrypt.compareSync(password, user.password);
   }
 };
 
-const User = mongoose.model('User', UserSchema);
-
-export default User;
-
+export default mongoose.model('User', UserSchema);

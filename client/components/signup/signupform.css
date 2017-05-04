@@ -27,6 +27,13 @@
   width: 500px;
 }
 
+.button[disabled] {
+    background: #e2e4e6;
+    box-shadow: none;
+    color: #8c8c8c;
+    cursor: default;
+}
+
 textarea, input {
     display: block;
     margin: 0 0 1.2em;

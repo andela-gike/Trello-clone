@@ -5,14 +5,19 @@ class SignupForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      Name: '',
-      FullName: '',
+      fullname: '',
       email: '',
+      username: '',
       password: '',
+      isLoading: false
     };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  getInitialState() {
+    return { email: '' };
   }
 
   onChange(e) {
@@ -22,7 +27,9 @@ class SignupForm extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     console.log(this.props);
-    this.props.SignupformRequest(this.state);
+    this.setState({ isLoading: true });
+    this.props.SignupformRequest(this.state).then(() => { },
+      ({ data }) => this.setState({ isLoading: false }));
     // console.log(this.state);
   }
 
@@ -34,29 +41,18 @@ class SignupForm extends React.Component {
         </div>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
-            <label className="control-label" htmlFor="Name">Name</label>
-            <input
-              placeholder="e.g., Gracious"
-              className="form-control"
-              type="text"
-              name="Name"
-              value={this.state.Name}
-              onChange={this.onChange}
-            />
-
-          </div>
-          <div className="form-group">
             <label className="control-label" htmlFor="fullname">FullName</label>
             <input
-              placeholder="e.g., Ike Grace"
+              placeholder="e.g., Gracious Ike"
               className="form-control"
               type="text"
-              name="FullName"
-              value={this.state.FullName}
+              name="fullname"
+              value={this.state.fullname}
               onChange={this.onChange}
             />
 
           </div>
+
           <div className="form-group">
             <label className="control-label" htmlFor="email">email</label>
             <input
@@ -70,6 +66,19 @@ class SignupForm extends React.Component {
 
           </div>
           <div className="form-group">
+            <label className="control-label" htmlFor="userame">UserName</label>
+            <input
+              placeholder="e.g., Graciousdelight"
+              className="form-control"
+              type="text"
+              name="username"
+              value={this.state.username}
+              onChange={this.onChange}
+            />
+
+          </div>
+
+          <div className="form-group">
             <label className="control-label" htmlFor="password">password</label>
             <input
               placeholder="e.g., ............."
@@ -81,7 +90,7 @@ class SignupForm extends React.Component {
             />
 
           </div>
-          <button type="submit" className="SignUp-Form-SubmitButton form-group">Create a New Account</button>
+          <button type="submit" disabled={!this.state.email} className="SignUp-Form-SubmitButton form-group">Create a New Account</button>
         </form>
       </div>
     );

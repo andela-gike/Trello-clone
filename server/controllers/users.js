@@ -1,34 +1,68 @@
 import mongoose from 'mongoose';
+import User from '../models/users';
 
-const User = mongoose.model('User');
+mongoose.model('User');
 
-exports.create = (req, res) => {
-  if (req.body.name && req.body.password && req.body.email) {
-    User.findOne({
-      email: req.body.email
-    }).exec((err, existingUser) => {
-      if (!existingUser) {
-        const user = new User(req.body);
-        user.provider = 'local';
-        user.save((err) => {
-          if (err) {
-            return res.render('/#!/signup?error=unknown', {
-              errors: err.errors,
-              user
-            });
-          }
-          req.logIn(user, (err) => {
-            if (err) {
-              return next(err);
-            }
-            return res.redirect('/#!/');
-          });
+const UserController = {
+  createNewUser(request, response, next) {
+    const fullname = request.body.fullname;
+    const email = request.body.email;
+    const username = request.body.username;
+    const password = request.body.password;
+
+    if (!fullname || !email || !username || !password) {
+      return response.status(400).send({
+        message: 'The paramaters are incomplete',
+      });
+    }
+    User.findOne({ email: request.body.email }, (err, user) => {
+      if (err) {
+        return next(err);
+      } else if (user) {
+        response.status(409).json({
+          message: 'A user with this email already exist'
         });
       } else {
-        return res.redirect('/#!/signup?error=existinguser');
+        user = new User();
+        user.fullname = fullname;
+        user.email = email;
+        user.username = username;
+        user.password = user.encryptPassword(password);
+        user.save(() => {
+          response.status(201).json({
+            message: 'Thanks! Your request to create a new user was successfuly!',
+            user
+          });
+          next();
+        });
       }
     });
-  } else {
-    return res.redirect('/#!/signup?error=incomplete');
+  },
+
+  loginUser(request, response, next) {
+    User.findOne({ email: request.body.email }, (err, user) => {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        response.status(400).json({
+          message: 'User was not found'
+        });
+      } else if (user.authenticate(user, request.body.password)) {
+        response.status(200).json({
+          message: 'You are sucessfully signed in', user
+        });
+      } else {
+        response.status(400).send({ message: 'Password is invalid' });
+      }
+    });
+  },
+
+  logoutUser(request, response) {
+    response.status(200).send({
+      message: 'You were logged out successfully'
+    });
   }
 };
+
+export default UserController;
