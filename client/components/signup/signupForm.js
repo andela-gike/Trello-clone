@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import './SignUpForm.css';
 
 class SignupForm extends React.Component {
@@ -28,9 +28,11 @@ class SignupForm extends React.Component {
     e.preventDefault();
     console.log(this.props);
     this.setState({ isLoading: true });
-    this.props.SignupformRequest(this.state).then(() => { },
+    this.props.SignupformRequest(this.state).then(() => {
+      this.context.router.push('/');
+    },
       ({ data }) => this.setState({ isLoading: false }));
-    // console.log(this.state);
+    console.log(this.state);
   }
 
   render() {
@@ -97,8 +99,17 @@ class SignupForm extends React.Component {
   }
 }
 
-SignupForm.proptypes = {
+SignupForm.propTypes = {
   SignupformRequest: React.PropTypes.func.isRequired
 };
+
+SignupForm.contextTypes = {
+  router: React.PropTypes.object.isRequired
+};
+
+// SignupForm.contextTypes = {
+//   router: PropTypes.object
+// };
+
 
 export default SignupForm;
