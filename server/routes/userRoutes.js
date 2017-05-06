@@ -6,8 +6,8 @@ const userRouter = express.Router();
 userRouter.route('/')
   .post(users.createNewUser);
 
-userRouter.route('/login');
-  // .post(users.loginUser);
+userRouter.route('/login')
+  .post(users.loginUser);
 
 userRouter.route('/logout');
   // .post(users.logoutUser);

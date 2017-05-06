@@ -15,12 +15,17 @@ const UserController = {
         message: 'The paramaters are incomplete',
       });
     }
-    User.findOne({ email: request.body.email }, (err, user) => {
+    User.findOne({
+      $or: [{
+        email: request.body.email,
+        username: request.body.username
+      }]
+    }, (err, user) => {
       if (err) {
         return next(err);
       } else if (user) {
         response.status(409).json({
-          message: 'A user with this email already exist'
+          message: 'A user with this email or username already exist'
         });
       } else {
         user = new User();
