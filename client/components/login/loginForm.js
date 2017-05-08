@@ -38,12 +38,14 @@ class LoginForm extends React.Component {
   }
 
   render() {
+    const { errors } = this.state;
     return (
       <div className="Login-Form">
         <div className="Login-Form-Header">
           <span className="Login-Form-Header-Title">Log in to Trello Clone</span>
         </div>
         <form onSubmit={this.onSubmit}>
+          {errors.form && <div className="alert alert-danger">{errors.form}</div> }
           <div className="form-group">
             <label className="control-label" htmlFor="email">email
               <span className="quiet"> (or username)</span>
@@ -55,7 +57,7 @@ class LoginForm extends React.Component {
               name="email"
               value={this.state.email}
               onChange={this.onChange}
-
+              checked={errors.email}
             />
 
           </div>
@@ -68,6 +70,7 @@ class LoginForm extends React.Component {
               name="password"
               value={this.state.password}
               onChange={this.onChange}
+              checked={errors.password}
             />
 
           </div>

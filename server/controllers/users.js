@@ -51,14 +51,14 @@ const UserController = {
       }
       if (!user) {
         response.status(400).json({
-          message: 'User was not found'
+          errors: { form: 'User was not found' }
         });
       } else if (user.authenticate(user, request.body.password)) {
         response.status(200).json({
           message: 'You are sucessfully signed in', user
         });
       } else {
-        response.status(400).send({ message: 'Password is invalid' });
+        response.status(400).send({ errors: { form: 'Password is invalid' } });
       }
     });
   },
