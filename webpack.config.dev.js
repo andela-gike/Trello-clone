@@ -1,40 +1,3 @@
-// import path from 'path';
-// import webpack from 'webpack';
-
-// export default {
-//   devtool: 'inline-source-map',
-//   entry: [
-//     'webpack-hot-middleware/client?reload=true',
-//     path.join(__dirname, './client/index.js')
-//   ],
-//   output: {
-//     path: '/',
-//     publicPath: '/'
-//   },
-//   plugins: [
-//     new webpack.NoEmitNoErrorsPlugin(),
-//     new webpack.HotModuleReplacementPlugin(),
-//     new webpack.optimize.OccurrenceOrderPlugin()
-//   ],
-//   module: {
-//     loaders: [
-//       {
-//         test: /\.js$/,
-//         include: [
-//           path.join(__dirname, 'client'),
-//           path.join(__dirname, 'server/shared')
-//         ],
-//         loaders: ['react-hot', 'babel-loader', 'css-loader']
-//       }
-//     ]
-//   },
-//   resolve: {
-//     alias: {
-//       jquery: path.resolve(__dirname, 'node_modules/jquery/dist/jquery.js')
-//     }
-//   },
-// };
-
 import webpack from 'webpack';
 import path from 'path';
 
@@ -111,5 +74,10 @@ export default {
         test: /materialize-css\/bin\//,
         loader: 'imports?jQuery=jquery,$=jquery,hammerjs' },
     ]
+  },
+
+  node: {
+    net: 'empty',
+    dns: 'empty'
   }
 };
