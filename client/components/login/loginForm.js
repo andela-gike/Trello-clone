@@ -29,11 +29,13 @@ class LoginForm extends React.Component {
     console.log(this.props);
     this.setState({ errors: {}, isLoading: true });
     this.props.LoginformRequest(this.state).then(
-        (res) => {
-          this.context.router.push('/');
-          // toastr.success('Logged in Successfully!');
-        },
-        err => this.setState({ errors: err.response.data.errors, isLoading: false })
+      (res) => {
+        this.context.router.push('/');
+        // toastr.success('Logged in Successfully!');
+      },
+        err => this.setState({
+          errors: err.response.data.errors, isLoading: false
+        })
       );
   }
 

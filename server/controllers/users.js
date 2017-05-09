@@ -54,8 +54,9 @@ const UserController = {
           errors: { form: `There isn't an account for this email` }
         });
       } else if (user.authenticate(user, request.body.password)) {
+        const token = user.generateToken(user.id, user.userName);
         response.status(200).json({
-          message: 'You are sucessfully signed in', user
+          message: 'You are sucessfully signed in', user, token
         });
       } else {
         response.status(400).send({ errors: { form: 'Invalid password' } });
