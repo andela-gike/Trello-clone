@@ -1,7 +1,12 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import moment from 'moment';
 
 const Schema = mongoose.Schema;
+
+const secret = process.env.SECRET || 'tHERTHRFBREHBVEHJBEHVBERHBRE';
+const expires = moment().add(1, 'days').valueOf();
 
 /**
  * User Schema
@@ -50,6 +55,15 @@ UserSchema.methods = {
    */
   authenticate: (user, password) => {
     return bcrypt.compareSync(password, user.password);
+  },
+
+  generateToken: (user) => {
+    const payload = {
+      userid: user.id,
+      username: user.username,
+    };
+    const token = jwt.sign(payload, secret, { expiresIn: expires });
+    return token;
   }
 };
 
