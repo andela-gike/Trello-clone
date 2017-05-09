@@ -3,6 +3,8 @@ import User from '../models/users';
 
 mongoose.model('User');
 
+
+
 const UserController = {
   createNewUser(request, response, next) {
     const fullname = request.body.fullname;
@@ -49,8 +51,9 @@ const UserController = {
           message: 'User was not found'
         });
       } else if (user.authenticate(user, request.body.password)) {
+        const token = user.generateToken(user.id, user.userName);
         response.status(200).json({
-          message: 'You are sucessfully signed in', user
+          message: 'You are sucessfully signed in', user, token
         });
       } else {
         response.status(400).send({ message: 'Password is invalid' });
@@ -104,6 +107,7 @@ const UserController = {
       message: 'You were logged out successfully'
     });
   }
+
 };
 
 export default UserController;
