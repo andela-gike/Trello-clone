@@ -1,5 +1,9 @@
 import React from 'react';
 
+ /**
+ * class
+ * @class
+ */
 class HomePage extends React.Component {
   render() {
     return (

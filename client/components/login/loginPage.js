@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import LoginForm from './loginForm';
 import { LoginformRequest } from '../../actions/loginActions';
 
+/**
+ * class
+ * @class
+ */
 class LoginPage extends React.Component {
   render() {
     const { LoginformRequest } = this.props;

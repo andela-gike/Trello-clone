@@ -15,3 +15,5 @@ React:
 
 - Redux is what gives the action such anytime anything happens action is dispatched by redux.
 - node is added to your webpack to contains net and dns because there are packages that json web token has that conflict with the browser.
+- Redux uses connect function to link any component to redux.
+- mapStateToProps return the prop of the component to redux.

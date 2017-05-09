@@ -1,6 +1,10 @@
 import React from 'react';
 import NavigationBar from '../common/navigationBar';
 
+/**
+ * class
+ * @class
+ */
 class App extends React.Component {
   render() {
     return (

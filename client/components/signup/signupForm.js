@@ -1,7 +1,15 @@
 import React, { PropTypes } from 'react';
 import './SignUpForm.css';
 
+/**
+ * class
+ * @class
+ */
 class SignupForm extends React.Component {
+  /**
+   * @constructor
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
