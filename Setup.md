@@ -16,4 +16,32 @@ React:
 - Redux is what gives the action such anytime anything happens action is dispatched by redux.
 - node is added to your webpack to contains net and dns because there are packages that json web token has that conflict with the browser.
 - Redux uses connect function to link any component to redux.
+- Redux logger is used to log information from redux it works like console.log, it log any action and state changes through the browser's console.
+- it has various options
+```
+{
+  predicate, // if specified this function will be called before each action is processed with this middleware.
+  collapsed, // takes a Boolean or optionally a Function that receives `getState` function for accessing current store state and `action` object as parameters. Returns `true` if the log group should be collapsed, `false` otherwise.
+  duration = false: Boolean, // print the duration of each action?
+  timestamp = true: Boolean, // print the timestamp with each action?
+
+  level = 'log': 'log' | 'console' | 'warn' | 'error' | 'info', // console's level
+  colors: ColorsObject, // colors for title, prev state, action and next state: https://github.com/evgenyrodionov/redux-logger/blob/master/src/defaults.js#L12-L18
+  titleFormatter, // Format the title used when logging actions.
+
+  stateTransformer, // Transform state before print. Eg. convert Immutable object to plain JSON.
+  actionTransformer, // Transform action before print. Eg. convert Immutable object to plain JSON.
+  errorTransformer, // Transform error before print. Eg. convert Immutable object to plain JSON.
+
+  logger = console: LoggerObject, // implementation of the `console` API.
+  logErrors = true: Boolean, // should the logger catch, log, and re-throw errors?
+
+  diff = false: Boolean, // (alpha) show diff between states?
+  diffPredicate // (alpha) filter function for showing states diff, similar to `predicate`
+}
+
+```
+- Redux thunk allows you to write action creators, it dispatch async actions.
 - mapStateToProps return the prop of the component to redux.
+- React router redux: This library allows you to use React Router's APIs as they are documented. And, you can use redux like you normally would, with a single app state. The library simply enhances a history instance to allow it to synchronize any changes it receives into application state.
+- Redux-simple-router is used to store the state of a route url in redux.

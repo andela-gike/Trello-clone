@@ -41,7 +41,7 @@ class SignupForm extends React.Component {
         type: 'success',
         text: 'Thanks! Your request to create a new user was successfuly!'
       });
-      this.context.router.push('/');
+      this.context.router.push('/login');
     },
       ({ data }) => this.setState({ isLoading: false }));
     console.log(this.state);
