@@ -45,3 +45,7 @@ React:
 - mapStateToProps return the prop of the component to redux.
 - React router redux: This library allows you to use React Router's APIs as they are documented. And, you can use redux like you normally would, with a single app state. The library simply enhances a history instance to allow it to synchronize any changes it receives into application state.
 - Redux-simple-router is used to store the state of a route url in redux.
+- Action work just like your controllers will work on your server side, they can be dispatched to various part of your application, redux receives every action that is carried out.
+- Store hold the whole state of the application, it dispatches and receives action.
+- The store passes dispatched actions to reducers, which receive the actions and make the appropriate changes to state.
+- Component are the thing we see when our magic on client is done. They present our magic to the world, They dsiplay the view, layer of our application.
