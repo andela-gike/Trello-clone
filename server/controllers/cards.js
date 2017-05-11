@@ -47,12 +47,27 @@ const cardsController = {
   },
 
   getSpecificCard(request, response) {
-
+    Cards.findById(request.params.id, (err, card) => {
+      if (err) {
+        response.status(500).send('There was a problem finding the card');
+      }
+      if (!card) {
+        return response.status(404).send('This card does not exist');
+      }
+      response.status(200).send(card);
+    });
   },
 
-  deleteCards(request, response) {
 
+  deleteCards(request, response) {
+    Cards.findByIdAndRemove(request.params.id, (err) => {
+      if (err) {
+        response.status(500).send('There was a problem deleting the card.');
+      }
+      response.status(200).send({ message: 'Card was successfully deleted.' });
+    });
   }
+
 };
 
 export default cardsController;
