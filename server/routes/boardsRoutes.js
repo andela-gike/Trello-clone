@@ -8,13 +8,13 @@ boardsRouter.route('/')
   .post(boards.createNewBoard);
 
 
-boardsRouter.route('/:id');
-  // .get(boards.getSpecificBoards)
-  // .put(boards.updateBoards)
-  // .delete(boards.deleteBoards);
+boardsRouter.route('/:id')
+  .get(boards.getSpecificBoard)
+  .put(boards.updateBoards)
+  .delete(boards.deleteBoards);
 
-boardsRouter.route('/users/:id');
-  // .get(boards.findUserBoards);
+boardsRouter.route('/')
+  .get(boards.findBoards);
 
 
 export default boardsRouter;

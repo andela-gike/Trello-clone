@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
  * Board Schema
  */
 const BoardSchema = new Schema({
-  name: {
+  title: {
     type: String,
     required: true
   },

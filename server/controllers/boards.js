@@ -21,16 +21,49 @@ const boardsController = {
     });
   },
 
-  updateCards(request, response) {
-
+  updateBoards(request, response) {
+    const id = request.params.id;
+    Boards.findByIdAndUpdate({ _id: id }, request.body,
+      (err, board) => {
+        if (err) {
+          response.status(500).send({
+            message: 'There was a problem updating the board.'
+          });
+        }
+        response.status(200).send(board);
+      });
   },
 
-  findUserCards(request, response) {
-
+  findBoards(request, response) {
+    Boards.find({}, (err, board) => {
+      if (err) {
+        response.status(500).json({
+          message: 'There is a problem listing all boards'
+        });
+      }
+      response.status(200).send(board);
+    });
   },
 
-  deleteCards(request, response) {
+  getSpecificBoard(request, response) {
+    Boards.findById(request.params.id, (err, board) => {
+      if (err) {
+        response.status(500).send('There was a problem finding the board');
+      }
+      if (!board) {
+        return response.status(404).send('This board does not exist');
+      }
+      response.status(200).send(board);
+    });
+  },
 
+  deleteBoards(request, response) {
+    Boards.findByIdAndRemove(request.params.id, (err) => {
+      if (err) {
+        response.status(500).send('There was a problem deleting the board.');
+      }
+      response.status(200).send({ message: 'Board was successfully deleted.' });
+    });
   }
 };
 

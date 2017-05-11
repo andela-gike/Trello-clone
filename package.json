@@ -4,7 +4,6 @@
   "description": "A Replica of the Trello board application to have card and and Todo items",
   "main": "server.js",
   "scripts": {
-    "test": "npm test",
     "start": "nodemon ./server --exec babel-node --presets es2015,react,airbnb,stage-2"
   },
   "repository": {

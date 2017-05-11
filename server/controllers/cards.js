@@ -24,10 +24,29 @@ const cardsController = {
   },
 
   updateCards(request, response) {
-
+    Cards.findByIdAndUpdate(request.params.id, request.body,
+      { new: true }, (err, card) => {
+        if (err) {
+          response.status(500).send({
+            message: 'There was a problem updating the card'
+          });
+        }
+        response.status(200).send(card);
+      });
   },
 
-  findUserCards(request, response) {
+  findCards(request, response) {
+    Cards.find({}, (err, card) => {
+      if (err) {
+        response.status(500).json({
+          message: 'There is a problem listing all cards'
+        });
+      }
+      response.status(200).send(card);
+    });
+  },
+
+  getSpecificCard(request, response) {
 
   },
 
