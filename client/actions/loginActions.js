@@ -24,7 +24,7 @@ export function setCurrentUser(user) {
 export function logout() {
   return (dispatch) => {
     localStorage.removeItem('token');
-    // localStorage.removeItem('user');
+    localStorage.removeItem('user');
     setAuthorizationToken(false);
     dispatch(setCurrentUser({}));
   };
@@ -40,6 +40,8 @@ export function LoginformRequest(data) {
   return dispatch => axios.post('/api/users/login', data)
     .then((response) => {
       const token = response.data.token;
+      const user = response.data.user;
+      localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', token);
       setAuthorizationToken(token);
       dispatch(setCurrentUser(jwt.decode(token)));

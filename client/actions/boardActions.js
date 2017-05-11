@@ -6,7 +6,8 @@ import axios from 'axios';
  * @returns {function} makes a past request to save new board
  */
 export function boardformRequest(board) {
-  return dispatch => axios.post('/api/boards', board);
-  // .then((response) => {
-  // });
+  return dispatch => axios.post('/api/boards', board)
+    .then((response) => {
+      (board);
+    });
 }
