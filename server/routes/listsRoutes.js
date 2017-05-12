@@ -12,9 +12,9 @@ listsRouter.route('/')
 
 
 listsRouter.route('/:id')
-  // .get(lists.getSpecificList)
-  .put(lists.updateLists);
-  // .delete(lists.deleteLists);
+  .get(lists.getSpecificList)
+  .put(lists.updateLists)
+  .delete(lists.deleteLists);
 
 listsRouter.route('/users/:id');
   // .get(lists.findUserlLists);

@@ -1,19 +1,20 @@
 import mongoose from 'mongoose';
 import Boards from '../models/boards';
+import Users from '../models/users';
 
 mongoose.model('Board');
 
 const boardsController = {
   createNewBoard(request, response) {
-    const name = request.body.name;
+    const title = request.body.title;
 
-    if (!name) {
+    if (!title) {
       return response.status(400).send({
         message: 'Your board does not have a name, please enter a board name ',
       });
     }
     const board = new Boards();
-    board.name = name;
+    board.title = title;
     board.save(() => {
       response.status(201).json({
         message: 'The request to create a new board was successfully', board
@@ -42,6 +43,20 @@ const boardsController = {
         });
       }
       response.status(200).send(board);
+    });
+  },
+
+  getUserBoard(request, response) {
+    Users.findById(request.params.user_id, (err, user) => {
+      if (err) {
+        return response.status(404).err;
+      }
+      Boards.find({ owner: user.userName }, (err, board) => {
+        if (err) {
+          return response.status(500).err;
+        }
+        return response.status(200).json(board);
+      });
     });
   },
 

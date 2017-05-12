@@ -3,8 +3,6 @@ import User from '../models/users';
 
 mongoose.model('User');
 
-
-
 const UserController = {
   createNewUser(request, response, next) {
     const fullname = request.body.fullname;

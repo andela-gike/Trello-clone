@@ -1,5 +1,6 @@
 import express from 'express';
 import users from '../controllers/users';
+import boards from '../controllers/boards';
 
 const userRouter = express.Router();
 
@@ -18,5 +19,8 @@ userRouter.route('/login')
 
 userRouter.route('/logout')
   .post(users.logoutUser);
+
+userRouter.route('/:user_id/documents')
+  .get(boards.getUserBoard);
 
 export default userRouter;

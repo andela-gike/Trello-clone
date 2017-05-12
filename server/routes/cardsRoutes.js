@@ -12,9 +12,9 @@ cardsRouter.route('/')
 
 
 cardsRouter.route('/:id')
-  // .get(cards.getSpecificCard)
-  .put(cards.updateCards);
-  // .delete(cards.deleteCards);
+  .get(cards.getSpecificCard)
+  .put(cards.updateCards)
+  .delete(cards.deleteCards);
 
 cardsRouter.route('/users/:id');
   // .get(cards.findUserCards);

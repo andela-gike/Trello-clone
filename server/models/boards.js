@@ -10,6 +10,7 @@ const BoardSchema = new Schema({
     type: String,
     required: true
   },
+  owner: String,
   isClosed: {
     type: Boolean
   },
