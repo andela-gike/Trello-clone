@@ -6,14 +6,16 @@ mongoose.model('Lists');
 const listsController = {
   createNewList(request, response) {
     const title = request.body.title;
+    const board = request.body.board;
 
-    if (!title) {
+    if (!title || !board) {
       return response.status(400).json({
         message: 'Your list does not have a title',
       });
     }
     const list = new Lists();
     list.title = title;
+    list.board = board;
     list.save(() => {
       response.status(201).json({
         message: 'The request to create a new list was successfully', list

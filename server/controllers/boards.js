@@ -7,19 +7,30 @@ mongoose.model('Board');
 const boardsController = {
   createNewBoard(request, response) {
     const title = request.body.title;
+    const owner = request.body.owner;
 
-    if (!title) {
+    if (!title || !owner) {
       return response.status(400).json({
-        message: 'Your board does not have a name, please enter a board name ',
+        message: 'Your board does not have a title, please enter a board title ',
       });
     }
     const board = new Boards();
     board.title = title;
-    board.save(() => {
-      response.status(201).json({
-        message: 'The request to create a new board was successfully', board
+    board.owner = owner;
+    board.save()
+      .then(() => {
+        response.status(201).json({
+          message: 'The request to create a new board was successfully', board
+        });
+      }, (err) => {
+        response.status(500).json({
+          message: err,
+        });
+      }).catch((error) => {
+        response.status(500).json({
+          message: error,
+        });
       });
-    });
   },
 
   updateBoards(request, response) {

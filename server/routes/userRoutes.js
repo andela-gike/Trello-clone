@@ -20,7 +20,7 @@ userRouter.route('/login')
 userRouter.route('/logout')
   .post(users.logoutUser);
 
-userRouter.route('/:user_id/documents')
+userRouter.route('/:user_id/boards')
   .get(boards.getUserBoard);
 
 export default userRouter;

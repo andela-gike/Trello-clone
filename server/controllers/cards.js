@@ -7,8 +7,9 @@ const cardsController = {
   createNewCard(request, response) {
     const title = request.body.title;
     const content = request.body.content;
+    const list = request.body.list;
 
-    if (!title || !content) {
+    if (!title || !content || !list) {
       return response.status(400).json({
         message: 'Your card does not have a title or a content',
       });
@@ -16,6 +17,7 @@ const cardsController = {
     const card = new Cards();
     card.title = title;
     card.content = content;
+    card.list = list;
     card.save(() => {
       response.status(201).json({
         message: 'The request to create a new card was successfully', card
