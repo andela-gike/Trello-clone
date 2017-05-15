@@ -59,13 +59,13 @@ const UserController = {
           message: 'You are sucessfully signed in', user, token
         });
       } else {
-        response.status(400).send({ errors: { form: 'Invalid password' } });
+        response.status(400).json({ errors: { form: 'Invalid password' } });
       }
     });
   },
 
   logoutUser(request, response) {
-    response.status(200).send({
+    response.status(200).json({
       message: 'You were logged out successfully'
     });
   }

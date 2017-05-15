@@ -8,7 +8,7 @@ const boardsController = {
     const title = request.body.title;
 
     if (!title) {
-      return response.status(400).send({
+      return response.status(400).json({
         message: 'Your board does not have a name, please enter a board name ',
       });
     }
