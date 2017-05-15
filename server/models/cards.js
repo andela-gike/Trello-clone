@@ -14,6 +14,7 @@ const CardSchema = new Schema({
     type: String,
     required: true
   },
+  list: { type: Schema.Types.ObjectId, ref: 'Lists', required: true },
   created: { type: Date, default: Date.now },
 });
 

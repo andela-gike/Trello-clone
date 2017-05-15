@@ -11,7 +11,7 @@ const UserController = {
     const password = request.body.password;
 
     if (!fullname || !email || !username || !password) {
-      return response.status(400).send({
+      return response.status(400).json({
         message: 'The paramaters are incomplete',
       });
     }
@@ -54,7 +54,7 @@ const UserController = {
           message: 'You are sucessfully signed in', user, token
         });
       } else {
-        response.status(400).send({ message: 'Password is invalid' });
+        response.status(400).json({ message: 'Password is invalid' });
       }
     });
   },
@@ -66,42 +66,42 @@ const UserController = {
           message: 'There was a problem listing all users'
         });
       }
-      response.status(200).send(user);
+      response.status(200).json(user);
     });
   },
 
   displayUserById(request, response) {
     User.findById(request.params.id, (err, user) => {
       if (err) {
-        response.status(500).send('There was a problem finding the user.');
+        response.status(500).json('There was a problem finding the user.');
       }
-      if (!user) { return response.status(404).send('No user found.'); }
-      response.status(200).send(user);
+      if (!user) { return response.status(404).json('No user found.'); }
+      response.status(200).json(user);
     });
   },
 
   updateUserById(request, response) {
     User.findByIdAndUpdate(request.params.id, request.body, { new: true }, (err, user) => {
       if (err) {
-        response.status(500).send({
+        response.status(500).json({
           message: 'There was a problem updating the user.'
         });
       }
-      response.status(200).send(user);
+      response.status(200).json(user);
     });
   },
 
   deleteUserById(request, response) {
     User.findByIdAndRemove(request.params.id, (err) => {
       if (err) {
-        response.status(500).send('There was a problem deleting the user.');
+        response.status(500).json('There was a problem deleting the user.');
       }
-      response.status(200).send({ message: 'User was deleted successfully.' });
+      response.status(200).json({ message: 'User was deleted successfully.' });
     });
   },
 
   logoutUser(request, response) {
-    response.status(200).send({
+    response.status(200).json({
       message: 'You were logged out successfully'
     });
   }

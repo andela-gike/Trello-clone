@@ -8,7 +8,7 @@ const listsController = {
     const title = request.body.title;
 
     if (!title) {
-      return response.status(400).send({
+      return response.status(400).json({
         message: 'Your list does not have a title',
       });
     }
@@ -25,11 +25,11 @@ const listsController = {
     Lists.findByIdAndUpdate(request.params.id, request.body,
       { new: true }, (err, list) => {
         if (err) {
-          response.status(500).send({
+          response.status(500).json({
             message: 'There was a problem updating the list'
           });
         }
-        response.status(200).send(list);
+        response.status(200).json(list);
       });
   },
 
@@ -40,19 +40,19 @@ const listsController = {
           message: 'There is a problem listing all lists'
         });
       }
-      response.status(200).send(list);
+      response.status(200).json(list);
     });
   },
 
   getSpecificList(request, response) {
     Lists.findById(request.params.id, (err, list) => {
       if (err) {
-        response.status(500).send('There was a problem finding the list');
+        response.status(500).json('There was a problem finding the list');
       }
       if (!list) {
-        return response.status(404).send('This list does not exist');
+        return response.status(404).json('This list does not exist');
       }
-      response.status(200).send(list);
+      response.status(200).json(list);
     });
   },
 
@@ -60,9 +60,9 @@ const listsController = {
   deleteLists(request, response) {
     Lists.findByIdAndRemove(request.params.id, (err) => {
       if (err) {
-        response.status(500).send('There was a problem deleting the list.');
+        response.status(500).json('There was a problem deleting the list.');
       }
-      response.status(200).send({ message: 'List was successfully deleted.' });
+      response.status(200).json({ message: 'List was successfully deleted.' });
     });
   }
 

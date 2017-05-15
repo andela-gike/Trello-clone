@@ -9,7 +9,7 @@ const boardsController = {
     const title = request.body.title;
 
     if (!title) {
-      return response.status(400).send({
+      return response.status(400).json({
         message: 'Your board does not have a name, please enter a board name ',
       });
     }
@@ -27,11 +27,11 @@ const boardsController = {
     Boards.findByIdAndUpdate({ _id: id }, request.body,
       (err, board) => {
         if (err) {
-          response.status(500).send({
+          response.status(500).json({
             message: 'There was a problem updating the board.'
           });
         }
-        response.status(200).send(board);
+        response.status(200).json(board);
       });
   },
 
@@ -42,7 +42,7 @@ const boardsController = {
           message: 'There is a problem listing all boards'
         });
       }
-      response.status(200).send(board);
+      response.status(200).json(board);
     });
   },
 
@@ -63,21 +63,21 @@ const boardsController = {
   getSpecificBoard(request, response) {
     Boards.findById(request.params.id, (err, board) => {
       if (err) {
-        response.status(500).send('There was a problem finding the board');
+        response.status(500).json('There was a problem finding the board');
       }
       if (!board) {
-        return response.status(404).send('This board does not exist');
+        return response.status(404).json('This board does not exist');
       }
-      response.status(200).send(board);
+      response.status(200).json(board);
     });
   },
 
   deleteBoards(request, response) {
     Boards.findByIdAndRemove(request.params.id, (err) => {
       if (err) {
-        response.status(500).send('There was a problem deleting the board.');
+        response.status(500).json('There was a problem deleting the board.');
       }
-      response.status(200).send({ message: 'Board was successfully deleted.' });
+      response.status(200).json({ message: 'Board was successfully deleted.' });
     });
   }
 };

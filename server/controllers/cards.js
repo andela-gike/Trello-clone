@@ -9,7 +9,7 @@ const cardsController = {
     const content = request.body.content;
 
     if (!title || !content) {
-      return response.status(400).send({
+      return response.status(400).json({
         message: 'Your card does not have a title or a content',
       });
     }
@@ -27,11 +27,11 @@ const cardsController = {
     Cards.findByIdAndUpdate(request.params.id, request.body,
       { new: true }, (err, card) => {
         if (err) {
-          response.status(500).send({
+          response.status(500).json({
             message: 'There was a problem updating the card'
           });
         }
-        response.status(200).send(card);
+        response.status(200).json(card);
       });
   },
 
@@ -42,19 +42,19 @@ const cardsController = {
           message: 'There is a problem listing all cards'
         });
       }
-      response.status(200).send(card);
+      response.status(200).json(card);
     });
   },
 
   getSpecificCard(request, response) {
     Cards.findById(request.params.id, (err, card) => {
       if (err) {
-        response.status(500).send('There was a problem finding the card');
+        response.status(500).json('There was a problem finding the card');
       }
       if (!card) {
-        return response.status(404).send('This card does not exist');
+        return response.status(404).json('This card does not exist');
       }
-      response.status(200).send(card);
+      response.status(200).json(card);
     });
   },
 
@@ -62,9 +62,9 @@ const cardsController = {
   deleteCards(request, response) {
     Cards.findByIdAndRemove(request.params.id, (err) => {
       if (err) {
-        response.status(500).send('There was a problem deleting the card.');
+        response.status(500).json('There was a problem deleting the card.');
       }
-      response.status(200).send({ message: 'Card was successfully deleted.' });
+      response.status(200).json({ message: 'Card was successfully deleted.' });
     });
   }
 

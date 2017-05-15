@@ -10,6 +10,9 @@ const ListSchema = new Schema({
     type: String,
     required: true
   },
+  board: {
+    type: Schema.Types.ObjectId, ref: 'Board', required: true
+  },
   created: { type: Date, default: Date.now },
 });
 

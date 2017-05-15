@@ -10,7 +10,7 @@ const BoardSchema = new Schema({
     type: String,
     required: true
   },
-  owner: String,
+  owner: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   isClosed: {
     type: Boolean
   },
