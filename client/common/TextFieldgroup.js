@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const TextFieldGroup = ({ placeholder, name, value, label, type, onChange }) => {
   return (
@@ -18,12 +19,12 @@ const TextFieldGroup = ({ placeholder, name, value, label, type, onChange }) => 
 };
 
 TextFieldGroup.propTypes = {
-  // placeholder: React.PropTypes.stirng.isRequired,
-  // name: React.PropTypes.stirng.isRequired,
-  value: React.PropTypes.stirng.isRequired,
-  label: React.PropTypes.stirng.isRequired,
-  type: React.PropTypes.stirng.isRequired,
-  onChange: React.PropTypes.func.isRequired
+  // placeholder: PropTypes.string.isRequired,
+  // name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 TextFieldGroup.defaultProps = {

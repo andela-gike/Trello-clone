@@ -1,11 +1,12 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SignupForm from './signupForm';
 import { SignupformRequest } from '../../actions/signupActions';
 import { addFlashMessage } from '../../actions/flashMessages';
 
 
-class SignupPage extends React.Component {
+class SignupPage extends Component {
   render() {
     const { SignupformRequest, addFlashMessage } = this.props;
     return (

@@ -1,11 +1,12 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './SignUpForm.css';
 
 /**
  * class
  * @class
  */
-class SignupForm extends React.Component {
+class SignupForm extends Component {
   /**
    * @constructor
    * @param {object} props
@@ -112,12 +113,12 @@ class SignupForm extends React.Component {
 }
 
 SignupForm.propTypes = {
-  SignupformRequest: React.PropTypes.func.isRequired,
-  addFlashMessage: React.PropTypes.func.isRequired,
+  SignupformRequest: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired,
 };
 
 SignupForm.contextTypes = {
-  router: React.PropTypes.object.isRequired
+  router: PropTypes.object.isRequired
 };
 
 export default SignupForm;

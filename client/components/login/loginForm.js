@@ -1,11 +1,12 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './LoginForm.css';
 
  /**
  * class
  * @class
  */
-class LoginForm extends React.Component {
+class LoginForm extends Component {
 
   /**
    * @constructor
@@ -92,11 +93,11 @@ class LoginForm extends React.Component {
 }
 
 LoginForm.propTypes = {
-  LoginformRequest: React.PropTypes.func.isRequired
+  LoginformRequest: PropTypes.func.isRequired
 };
 
 LoginForm.contextTypes = {
-  router: React.PropTypes.object.isRequired
+  router: PropTypes.object.isRequired
 };
 
 export default LoginForm;

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LoginForm from './loginForm';
 import { LoginformRequest } from '../../actions/loginActions';
@@ -7,7 +8,7 @@ import { LoginformRequest } from '../../actions/loginActions';
  * class
  * @class
  */
-class LoginPage extends React.Component {
+class LoginPage extends Component {
   render() {
     const { LoginformRequest } = this.props;
     return (

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import BoardForm from './boardForm';
 import { boardformRequest } from '../../actions/boardActions';
@@ -7,7 +8,7 @@ import { boardformRequest } from '../../actions/boardActions';
  * class
  * @class
  */
-class BoardPage extends React.Component {
+class BoardPage extends Component {
   render() {
     const { boardformRequest } = this.props;
     return (

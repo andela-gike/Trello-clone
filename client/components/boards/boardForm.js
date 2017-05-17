@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { ReactPageClick } from 'react-page-click';
 
 const styles = {
@@ -39,7 +40,7 @@ const styles = {
  * class
  * @class
  */
-class BoardForm extends React.Component {
+class BoardForm extends Component {
    /**
    * @constructor
    * @param {object} props
@@ -104,11 +105,11 @@ class BoardForm extends React.Component {
 }
 
 BoardForm.propTypes = {
-  boardformRequest: React.PropTypes.func.isRequired
+  boardformRequest: PropTypes.func.isRequired
 };
 
 BoardForm.contextTypes = {
-  router: React.PropTypes.object.isRequired
+  router: PropTypes.object.isRequired
 };
 
 export default BoardForm;

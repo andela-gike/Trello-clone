@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 
  /**
  * class
  * @class
  */
-class HomePage extends React.Component {
+class HomePage extends Component {
   render() {
     return (
       <div className="z-depth-8 jumbotron">
