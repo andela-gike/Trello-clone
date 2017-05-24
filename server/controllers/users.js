@@ -1,7 +1,20 @@
 import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
+import moment from 'moment';
 import User from '../models/users';
 
 mongoose.model('User');
+
+const secret = process.env.SECRET || 'thernbhmvgj,sdgbskjlfgshjdfsjdfsvdjkfhgs';
+const expires = moment().add(1, 'days').valueOf();
+
+function generateToken(user) {
+  const payload = {
+    userinfo: user
+  };
+  const token = jwt.sign(payload, secret, { expiresIn: expires });
+  return token;
+}
 
 const UserController = {
   createNewUser(request, response, next) {
@@ -29,9 +42,11 @@ const UserController = {
         user.username = username;
         user.password = user.encryptPassword(password);
         user.save(() => {
+          const token = generateToken(user);
           response.status(201).json({
             message: 'Thanks! Your request to create a new user was successfuly!',
-            user
+            user,
+            token
           });
           next();
         });
@@ -49,7 +64,7 @@ const UserController = {
           message: 'User was not found'
         });
       } else if (user.authenticate(user, request.body.password)) {
-        const token = user.generateToken(user.id, user.userName);
+        const token = generateToken(user);
         response.status(200).json({
           message: 'You are sucessfully signed in', user, token
         });

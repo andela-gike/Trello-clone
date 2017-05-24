@@ -35,6 +35,7 @@
     "body-parser": "^1.17.1",
     "chai": "^3.5.0",
     "coveralls": "^2.13.0",
+    "dotenv": "^4.0.0",
     "express": "^4.15.2",
     "fs": "0.0.1-security",
     "istanbul": "^0.4.5",
