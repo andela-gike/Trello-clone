@@ -5,16 +5,8 @@ import User from '../models/users';
 
 mongoose.model('User');
 
-const secret = process.env.SECRET || 'thernbhmvgj,sdgbskjlfgshjdfsjdfsvdjkfhgs';
+const secret = process.env.SECRET || 'tHEISArumblingInMy_tuMMY1234HYJOKUR';
 const expires = moment().add(1, 'days').valueOf();
-
-function generateToken(user) {
-  const payload = {
-    userinfo: user
-  };
-  const token = jwt.sign(payload, secret, { expiresIn: expires });
-  return token;
-}
 
 const UserController = {
   createNewUser(request, response, next) {
@@ -42,11 +34,17 @@ const UserController = {
         user.username = username;
         user.password = user.encryptPassword(password);
         user.save(() => {
-          const token = generateToken(user);
+          const payload = { username, email };
+          const token = jwt.sign(payload, secret);
           response.status(201).json({
             message: 'Thanks! Your request to create a new user was successfuly!',
-            user,
-            token
+            user: {
+              userId: user._id,
+              username: user.username,
+              email: user.email
+            },
+            token,
+            expiresIn: expires
           });
           next();
         });
@@ -64,9 +62,17 @@ const UserController = {
           message: 'User was not found'
         });
       } else if (user.authenticate(user, request.body.password)) {
-        const token = generateToken(user);
+        const payload = { username: user.username, email: user.email };
+        const token = jwt.sign(payload, secret);
         response.status(200).json({
-          message: 'You are sucessfully signed in', user, token
+          message: 'You are sucessfully signed in',
+          user: {
+            userId: user._id,
+            username: user.username,
+            email: user.email
+          },
+          token,
+          expiresIn: expires
         });
       } else {
         response.status(400).json({ message: 'Password is invalid' });

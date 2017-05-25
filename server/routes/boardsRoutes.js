@@ -1,20 +1,21 @@
 import express from 'express';
 import boards from '../controllers/boards';
+import Auth from '../middleWare/Authentication';
 
 
 const boardsRouter = express.Router();
 
 boardsRouter.route('/')
-  .post(boards.createNewBoard);
+  .post(Auth.verifyUser, boards.createNewBoard);
 
 
 boardsRouter.route('/:id')
-  .get(boards.getSpecificBoard)
-  .put(boards.updateBoards)
-  .delete(boards.deleteBoards);
+  .get(Auth.verifyUser, boards.getSpecificBoard)
+  .put(Auth.verifyUser, boards.updateBoards)
+  .delete(Auth.verifyUser, boards.deleteBoards);
 
 boardsRouter.route('/')
-  .get(boards.findBoards);
+  .get(Auth.verifyUser, boards.findBoards);
 
 
 export default boardsRouter;

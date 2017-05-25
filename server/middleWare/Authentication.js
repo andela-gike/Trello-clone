@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 dotenv.config({ silent: true });
 
-const secret = process.env.SECRET || 'Happypeopledontkeepsecret';
+const secret = process.env.SECRET || 'tHEISArumblingInMy_tuMMY1234HYJOKUR';
 
 const Authentication = {
   verifyUser(request, response, next) {
@@ -14,7 +14,7 @@ const Authentication = {
     }
     jwt.verify(token, secret, (err, decoded) => {
       if (err) {
-        response.status(401).send({ message: 'Invalid token' });
+        response.status(401).json({ message: 'Invalid token', err });
       } else {
         request.decodedToken = decoded;
         next();
